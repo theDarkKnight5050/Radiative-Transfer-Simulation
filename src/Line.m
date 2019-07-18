@@ -37,16 +37,16 @@ classdef Line
             line.E2=73768.2*C.h*100*C.co; 
             line.E21=(C.h*C.co/(line.lama*1e-10)); 
             line.E1=line.E2-line.E21; 
-            line.B21a=line.A21a*(line.lama^5/(2*C.h*C.co^2));  
+            line.B21a=line.A21a*((line.lama*1e-10)^5/(2*C.h*C.co^2));  
             line.B12a=line.g2a*line.B21a/line.g1a; 
             
-            M=dlmread('data/partition_function.csv',',',1,0);
+            M=dlmread('../data/partition_function.csv',',',1,0);
             line.Tpart=M(:,1); 
             line.Yn=M(:,2);    
             line.Y1=M(:,3);    
             line.Y2=M(:,4);    
             
-            M=dlmread('data/ionization_depression.csv',',',1,0);
+            M=dlmread('../data/ionization_depression.csv',',',1,0);
             line.Nedep=log10(M(:,1)); 
             line.dE1=M(:,2);          
         end

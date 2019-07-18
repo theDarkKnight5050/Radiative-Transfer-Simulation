@@ -19,6 +19,7 @@ prompt="Input the y-position of interest (must be less than %d if parabolic Te, 
 ypos=input(sprintf(prompt, P.Rp, P.Ro)); 
 %Gaussian Temp Profile
 xmin=-(P.Rp^2-ypos^2)^.5;
+xmin=-(P.Rp^2-ypos^2)^.5;
 xmax=(P.Rp^2-ypos^2)^.5;
 %Parabolic Temp Profie
 %xmin=-(P.Ro^2-ypos^2)^.5;
@@ -58,11 +59,11 @@ for i=1:length(np) %spectral frequency interval
 
         %% Computes the LTE model
         % Saha Equation
-        [ne, n1, n2]=saha(beta, P.No, L, C);
+        [ne n1 n2 Zci]=saha(beta, P.No, L, C);
         % Stark Parameters
         [wa da]=stark(ne, Te, L, P, C);
         % Emission and Absorption        
-        [eps, kap]=bremss(n1, n2, L, C, ne, Te);
+        [eps kap]=bremss(n1, n2, Zci, L, C, ne, Te);
         Linshape=(1/C.pi/wa)/(((npx-da)^2)/(wa^2)+1);
         
         epsL(i,k)=eps*Linshape;

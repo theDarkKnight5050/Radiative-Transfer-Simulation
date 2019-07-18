@@ -2,7 +2,7 @@
 %% Created: 2019-07-11
 %% Computes ion and neutral number density along with volumetric electron density assuming LTE
 
-function [Ne, N1, N2] = saha(beta, No, L, C)
+function [Ne, N1, N2, Zci] = saha(beta, No, L, C)
 
 [Zci Zcn]=partition(L,(C.kB*beta)^-1);
 

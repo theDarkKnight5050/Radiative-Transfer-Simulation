@@ -26,12 +26,13 @@ xmax=(P.Rp^2-ypos^2)^.5;
 %xmax=(P.Ro^2-ypos^2)^.5;
 xx=xmin:(xmax-xmin)/40: xmax;
 
-prompt="Input the desired number of data points: ";
-x=200/input(prompt);
-np = -100:x:100;  %advancement of wavelength in Angstroms
+numPoints=input(prompt="Input the desired number of data points: ");
+x=20/numPoints;
+np = -10:x:10;  %advancement of wavelength in Angstroms
 intgrl=zeros(1,length(np));
 disp("Processing each spectral element (each . represents 5 dlambdas)");
 count=0;
+colors=varycolor(numPoints+1);
 for i=1:length(np) %spectral frequency interval
     count++;
     if(count==5)
@@ -40,7 +41,7 @@ for i=1:length(np) %spectral frequency interval
     endif
     
     npx=np(i);
-    lam=npx+L.lama; %wavelength in Angstroms where lama is line center wavelength in Angstroms
+    lama=L.lama+npx;
     epsval=[];
     kapval=[];
     epsL=[];
@@ -63,8 +64,8 @@ for i=1:length(np) %spectral frequency interval
         % Stark Parameters
         [wa da]=stark(ne, Te, L, P, C);
         % Emission and Absorption        
-        [eps kap]=bremss(n1, n2, Zci, L, C, ne, Te);
-        Linshape=(1/C.pi/wa)/(((npx-da)^2)/(wa^2)+1);
+        [eps kap]=bremss(n1, n2, Zci, lama*1e-10, L, C, ne, Te);
+        Linshape=(1/C.pi/wa)/(((npx-da)/wa)^2+1)+2*C.h*C.co^2/lama^5/(exp(L.E21*beta)-1);
         
         epsL(i,k)=eps*Linshape;
         kapL(i,k)=kap*Linshape;
@@ -79,16 +80,16 @@ for i=1:length(np) %spectral frequency interval
         % kapfit=polyfit(xx, kapL, pcoeff);
     end
     figure(1)
-    plot(xx,epsL(i,:),'r-');
+    plot(xx,log10(epsL(i,:)), 'Color',colors(i,:));
     % %plot(xx,epsL,'r-', xx, epsval(i,:), 'ro');
-    ylabel('volume emission coefficiet');
+    ylabel('Volume Emission Coefficient (log)');
     xlabel('position');
     hold on
     % 
     figure(2)
-    plot(xx,kapL(i,:),'r-');
+    plot(xx,log10(kapL(i,:)), 'Color',colors(i,:));
     %plot (xx,kapL,'r-', xx, kapval(i,:), 'ro');
-    ylabel('volume absorption coefficient');
+    ylabel('Volume Absorption Coefficient (log)');
     xlabel('position');
     hold on
 

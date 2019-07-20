@@ -13,7 +13,7 @@ if Ne>1e20 %only starts taking into account depression at 10^20m^(-3)
     while true 
         E_id=spline(L.Nedep,L.dE1,log10(Ne));
         const=(2*Zci/Zcn)*(2*C.pi*C.me/beta/C.h^2)^1.5*exp(-(L.Ei-E_id*C.e)*beta);
-        Ne=(-const+sqrt(const^2+4*No*const))/2;
+        Ne=(-const+sqrt(const^2+4*No*const))/2
         if abs(E_id-spline(L.Nedep,L.dE1,log10(Ne)))<1e-2, break; %break when improvement becomes negligible
         else, E_id=spline(L.Nedep,L.dE1,log10(Ne));
         end 

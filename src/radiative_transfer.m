@@ -27,8 +27,8 @@ xmax=(P.Rp^2-ypos^2)^.5;
 xx=xmin:(xmax-xmin)/40:xmax;
 
 numPoints=input(prompt="Input the desired number of data points: ");
-x=1000/numPoints;
-np=-500:x:500;  %advancement of wavelength in Angstroms
+x=20/numPoints;
+np=-10:x:10;  %advancement of wavelength in Angstroms
 intgrl=zeros(1,length(np));
 disp("Processing each spectral element (each . represents 5 dlambdas)");
 count=0;
@@ -76,14 +76,14 @@ for i=1:length(np) %spectral frequency interval
         % kapfit=polyfit(xx, kapL, pcoeff);
     end
     figure(1)
-    plot(xx,(epsL(i,:)), 'Color',colors(i,:));
+    plot(xx,log10(epsL(i,:)), 'Color',colors(i,:));
     % %plot(xx,epsL,'r-', xx, epsval(i,:), 'ro');
     ylabel('Volume Emission Coefficient (log)');
     xlabel('position');
     hold on
     % 
     figure(2)
-    plot(xx,(kapL(i,:)), 'Color',colors(i,:));
+    plot(xx,log10(kapL(i,:)), 'Color',colors(i,:));
     %plot (xx,kapL,'r-', xx, kapval(i,:), 'ro');
     ylabel('Volume Absorption Coefficient (log)');
     xlabel('position');

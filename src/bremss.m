@@ -8,8 +8,7 @@ eps=kap=0;
 
 lama=(L.lama+pos)*1E-10;
 [wa da]=stark(ne, Te, L, P, C);
-Linshape=(1/C.pi/wa)/(((pos-da)/wa)^2+1);
-Linshape=(1/C.pi/wa)/(((pos-da)/wa)^2+1);
+Linshape=(1/C.pi/wa)/(((pos-da)/wa)^2+1)*10^10;
 Pa=2*C.h*C.co^2/lama^5/(exp(L.E21/C.kB/Te)-1); %Planck body source function
 
 ratio=L.E21/(4*C.pi)*n2*L.A21a*Linshape;

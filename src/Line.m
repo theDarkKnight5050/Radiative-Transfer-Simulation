@@ -51,4 +51,4 @@ classdef Line
             line.dE1=M(:,2);          
         end
    end
-endclassdef
+end

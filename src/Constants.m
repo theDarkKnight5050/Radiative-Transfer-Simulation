@@ -11,4 +11,4 @@ classdef Constants
       pi=3.14159;        %pi
       epsilon=8.853e-12; %permativity of free space
     end
-endclassdef
+end

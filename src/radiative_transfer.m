@@ -41,10 +41,9 @@ for i=1:length(np) %spectral frequency interval
     endif
     
     npx=np(i);
-    epsval=[];
-    kapval=[];
     epsL=[];
     kapL=[];
+    ratioL=[];
     
     for k=1:length(xx)
         x=xx(k);
@@ -65,27 +64,27 @@ for i=1:length(np) %spectral frequency interval
         N2x(k)=n2;
         N1x(k)=n1;
         % Emission and Absorption        
-        [eps kap]=bremss(n1, n2, Zci, npx, L, P, C, ne, Te);       
+        [eps kap ratio]=bremss(n1, n2, Zci, npx, L, P, C, ne, Te);       
         epsL(i,k)=eps;
         kapL(i,k)=kap;
+        ratioL(i,k)=ratio;
         
-        %pcoeff=8;  %coefficient of polynomial fit.
-        % plasma geometry is a cylinder
-        % %Fitting functions to the volume emission and absorption accross slabs
-        % epsfit=polyfit(xx, epsL, pcoeff);
-        % kapfit=polyfit(xx, kapL, pcoeff);
     end
     figure(1)
-    plot(xx,log10(epsL(i,:)), 'Color',colors(i,:));
-    % %plot(xx,epsL,'r-', xx, epsval(i,:), 'ro');
+    plot(xx,log10(epsL(i,:)),'Color',colors(i,:));
     ylabel('Volume Emission Coefficient (log)');
     xlabel('position');
     hold on
     % 
     figure(2)
-    plot(xx,log10(kapL(i,:)), 'Color',colors(i,:));
-    %plot (xx,kapL,'r-', xx, kapval(i,:), 'ro');
+    plot(xx,log10(kapL(i,:)),'Color',colors(i,:));
     ylabel('Volume Absorption Coefficient (log)');
+    xlabel('position');
+    hold on
+    %
+    figure(3)
+    plot(xx,log10(ratioL(i,:)),'Color',colors(i,:));
+    ylabel('Line-Continuum Emission Ratio');
     xlabel('position');
     hold on
 
@@ -107,31 +106,31 @@ printf("\n");
 input("Press [enter] to graph results");
 disp("Graphing results...");
 
-figure(3)
+figure(4)
 semilogy(xx,N1x,'r-');
 ylabel('Lower State Density');
 xlabel('position');
 hold on
 
-figure(4)
+figure(5)
 semilogy(xx,N2x,'r-');
 ylabel('Upper State Density');
 xlabel('position');
 hold on
 
-figure(5)
+figure(6)
 plot(xx,Tex,'r-');
 ylabel('Temperature');
 xlabel('position');
 hold on
 
-figure(6)
+figure(7)
 semilogy(xx,Nex,'r-');
 ylabel('Electron Density');
 xlabel('position');
 hold on
 
-figure(7)
+figure(8)
 plot(np,intgrl,'r-');
 ylabel('spectral radiance');
 xlabel('wavelength(nm)'); 

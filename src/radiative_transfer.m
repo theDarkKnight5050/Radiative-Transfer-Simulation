@@ -2,20 +2,20 @@
 %line from a cylindrically symmetric source - M.A. Cappelli June 2019
 clear all;
 close all;
-disp("This program computes the analytical solution for the 1D radiation transfer equation for a spectral line from a cylindrically symmetric source");
-disp("Author: M.A. Cappelli");
+disp('This program computes the analytical solution for the 1D radiation transfer equation for a spectral line from a cylindrically symmetric source');
+disp('Author: M.A. Cappelli');
 
 %fundamental constants
 C=Constants;
 
 % Defines parameters of the current line
-disp("Computing line properties...");
+disp('Computing line properties...');
 L=Line(C);
 
 %% Deals with the geometry and plasma conditions
-disp("Loading plasma conditions...");
+disp('Loading plasma conditions...');
 P=Plasma;
-prompt="Input the y-position of interest (must be less than %d if parabolic Te, less than %d if Gaussian): ";
+prompt='Input the y-position of interest (must be less than %d if parabolic Te, less than %d if Gaussian): ';
 ypos=input(sprintf(prompt, P.Rp, P.Ro)); 
 %Gaussian Temp Profile
 xmin=-(P.Ro^2-ypos^2)^.5;
@@ -26,17 +26,17 @@ xmax=(P.Ro^2-ypos^2)^.5;
 %xmax=(P.Rp^2-ypos^2)^.5;
 xx=xmin:(xmax-xmin)/40:xmax;
 
-numPoints=input(prompt="Input the desired number of data points: ");
+numPoints=input(prompt='Input the desired number of data points: ');
 x=20/numPoints;
 np=-10:x:10;  %advancement of wavelength in nanometers
 intgrl=zeros(1,length(np));
-disp("Processing each spectral element (each . represents 5 dlambdas)");
+disp('Processing each spectral element (each . represents 5 dlambdas)');
 count=0;
 colors=varycolor(numPoints+1);
 for i=1:length(np) %spectral frequency interval
     count++;
     if(count==5)
-        printf(".");
+        printf('.');
         count=0;
     endif
     
@@ -101,10 +101,10 @@ for i=1:length(np) %spectral frequency interval
     end
     intgrl(i)=trapz(xx,integrand);
 end
-printf("\n"); 
+printf('\n'); 
 
-input("Press [enter] to graph results");
-disp("Graphing results...");
+input('Press [enter] to graph results');
+disp('Graphing results...');
 
 figure(4)
 semilogy(xx,N1x,'r-');

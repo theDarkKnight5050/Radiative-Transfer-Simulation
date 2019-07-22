@@ -28,7 +28,7 @@ xx=xmin:(xmax-xmin)/40:xmax;
 
 numPoints=input(prompt="Input the desired number of data points: ");
 x=20/numPoints;
-np=-10:x:10;  %advancement of wavelength in Angstroms
+np=-10:x:10;  %advancement of wavelength in nanometers
 intgrl=zeros(1,length(np));
 disp("Processing each spectral element (each . represents 5 dlambdas)");
 count=0;

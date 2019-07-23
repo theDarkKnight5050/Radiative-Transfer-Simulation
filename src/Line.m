@@ -5,13 +5,13 @@
 classdef Line
     properties
         A21a=3.69e7;  %einstein spontaneous emission coefficient (s^-1)
-        lama=7771.94; %line a center wavelength (note Oxygen is a triplet)in Angstroms
+        lama=7771.94; %line a center wavelength (note Oxygen is a triplet) in Angstroms
         g1a=5;        %lower state generacy
         g2a=15;       %upper e degeneracy - note that for O we are lumping the three states together
         Ei;           %ionization energy (J) of the oxygen atom (not reduced by shielding)
         E2;           %upper state energy  (J)
         E21;          %transition energy (J)
-        E1;           %lower state energy
+        E1;           %lower state energy (J)
         B21a;         %Einstein Stimulated Emission (See Wikipedia - Einstein Coefficients) given in wavelength units for spectral radiance [B]=M^(-1)LT^2
         B12a;         %Einstein Stimulated Absorption
         
@@ -33,7 +33,7 @@ classdef Line
     end
     methods
         function line=Line(C)
-            line.Ei= (13.62)*C.e; 
+            line.Ei=(13.62)*C.e; 
             line.E2=73768.2*C.h*100*C.co; 
             line.E21=(C.h*C.co/(line.lama*1e-10)); 
             line.E1=line.E2-line.E21; 

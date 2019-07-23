@@ -14,7 +14,7 @@ L=Line(C);
 
 %% Deals with the geometry and plasma conditions
 disp('Loading plasma conditions...');
-P=Plasma;
+P=Plasma();
 prompt='Input the y-position of interest (must be less than %d if parabolic Te, less than %d if Gaussian): ';
 ypos=input(sprintf(prompt, P.Rp, P.Ro)); 
 % Gaussian Temp Profile
@@ -27,8 +27,9 @@ xmax=(P.Ro^2-ypos^2)^.5;
 xx=xmin:(xmax-xmin)/40:xmax;
 
 numPoints=input(prompt='Input the desired number of data points: ');
-x=200/numPoints;
-np=-100:x:100;  %advancement of wavelength in angstroms
+width=input(prompt='Input the desired window size (in Angstroms): ');
+x=2*width/numPoints;
+np=-width:x:width;  %advancement of wavelength in angstroms
 intgrl=zeros(1,length(np));
 disp('Processing each spectral element (each . represents 5 dlambdas)');
 count=0;

@@ -14,7 +14,7 @@ L=Line(C);
 
 %% Deals with the geometry and plasma conditions
 disp('Loading plasma conditions...');
-P=Plasma();
+P=Plasma(C);
 prompt='Input the y-position of interest (must be less than %d if parabolic Te, less than %d if Gaussian): ';
 ypos=input(sprintf(prompt, P.Rp, P.Ro)); 
 % Gaussian Temp Profile
@@ -29,7 +29,7 @@ xx=xmin:(xmax-xmin)/40:xmax;
 numPoints=input(prompt='Input the desired number of data points: ');
 width=input(prompt='Input the desired window size (in Angstroms): ');
 x=2*width/numPoints;
-np=-width:x:width;  %advancement of wavelength in angstroms
+np=-width:x:width;  %advancement of wavelength in Angstroms
 intgrl=zeros(1,length(np));
 disp('Processing each spectral element (each . represents 5 dlambdas)');
 count=0;
@@ -68,9 +68,9 @@ for i=1:length(np) %spectral frequency interval
         [eps kap ratio]=bremss(n1, n2, Zci, npx, L, P, C, ne, Te);       
         epsL(i,k)=eps;
         kapL(i,k)=kap;
-        ratioL(i,k)=ratio;
-        
+        ratioL(i,k)=ratio;       
     end
+    
     figure(1)
     plot(xx,log10(epsL(i,:)),'Color',colors(i,:));
     ylabel('Volume Emission Coefficient (log)');
@@ -108,26 +108,26 @@ input('Press [enter] to graph results');
 disp('Graphing results...');
 
 figure(4)
-semilogy(xx,N1x,'r-');
-ylabel('Lower State Density');
-xlabel('position');
-hold on
-
-figure(5)
-semilogy(xx,N2x,'r-');
-ylabel('Upper State Density');
-xlabel('position');
-hold on
-
-figure(6)
 plot(xx,Tex,'r-');
 ylabel('Temperature');
 xlabel('position');
 hold on
 
-figure(7)
+figure(5)
 semilogy(xx,Nex,'r-');
 ylabel('Electron Density');
+xlabel('position');
+hold on
+
+figure(6)
+semilogy(xx,N1x,'r-');
+ylabel('Lower State Density');
+xlabel('position');
+hold on
+
+figure(7)
+semilogy(xx,N2x,'r-');
+ylabel('Upper State Density');
 xlabel('position');
 hold on
 

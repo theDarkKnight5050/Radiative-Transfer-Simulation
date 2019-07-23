@@ -9,10 +9,12 @@ classdef Plasma
       Temin=2000;  %minimum plasma temperature
       No=2.67e25;  %atom density (m^-3)- we assume plasma has not had time to expand
       Neref=1e22;  %reference density from Griem (m^-3);
+      Wp;          %plasma frequency=Wp*ne^0.5
   end
   methods
-    function plasma=Plasma()
+    function plasma=Plasma(C)
       plasma.Temax=11604*input(prompt='Input max temperature in electron volts (minimum of 0.172): ');
+      plasma.Wp=(C.e^2/C.me/C.epsilon)^0.5;
     end
   end
 endclassdef

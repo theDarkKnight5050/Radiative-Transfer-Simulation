@@ -8,5 +8,9 @@ d=spline(L.Tstark, L.dw_range, Te)*w;                        % d: Electron impac
 alpha=spline(L.Tstark, L.alpha_range, Te)*(Ne/P.Neref)^0.25; % alpha: Ion broadening factor
 wa=(1+1.75*alpha*(1-0.75*R_Debye))*w;                        % Stark half width half maximum in Angstroms
 da=(d/w+2*alpha*(1-0.75*R_Debye))*w;                         % Stark shift in Angstroms
+##if R_Debye>=0.8 || alpha>=0.5
+##  warning='WARNING: stark parameters no longer in accurate regime. alpha=%d R_Debye=%d';
+##  disp(sprintf(warning, alpha, R_Debye));
+##end
 %wa=1; da=0;
 end

@@ -19,7 +19,6 @@ prompt='Input the y-position of interest (must be less than %d if parabolic Te, 
 ypos=input(sprintf(prompt, P.Rp, P.Ro)); 
 % Gaussian Temp Profile
 xmin=-(P.Ro^2-ypos^2)^.5;
-xmin=-(P.Ro^2-ypos^2)^.5;
 xmax=(P.Ro^2-ypos^2)^.5;
 % Parabolic Temp Profie
 %xmin=-(P.Rp^2-ypos^2)^.5;
@@ -35,7 +34,7 @@ disp('Processing each spectral element (each . represents 5 dlambdas)');
 count=0;
 colors=varycolor(numPoints+1);
 for i=1:length(np) %spectral frequency interval
-    count++;
+    count=count+1;
     if(count==5)
         printf('.');
         count=0;
@@ -52,7 +51,7 @@ for i=1:length(np) %spectral frequency interval
         
         %% Temperature calculation
         % Parabolic Temp
-        %Te=Temin+Temax*(1-0.5*Rxy^2/Rp^2); 
+        %Te=P.Temin+(P.Temax-P.Temin)*(1-0.5*Rxy^2/P.Rp^2); 
         % Gaussian Temp
         Te=(P.Temax-P.Temin)*exp(-(Rxy^2)/(P.Rp^2))+P.Temin;
         beta=1/(C.kB*Te);
@@ -132,6 +131,6 @@ xlabel('position');
 hold on
 
 figure(8)
-plot(np,intgrl,'r-');
+plot(np,(intgrl),'r-');
 ylabel('spectral radiance');
 xlabel('wavelength(A)'); 

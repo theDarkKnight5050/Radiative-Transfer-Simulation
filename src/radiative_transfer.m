@@ -36,7 +36,7 @@ colors=varycolor(numPoints+1);
 for i=1:length(np) %spectral frequency interval
     count=count+1;
     if(count==5)
-        printf('.');
+        fprintf('.');
         count=0;
     end
     
@@ -101,7 +101,7 @@ for i=1:length(np) %spectral frequency interval
     end
     intgrl(i)=trapz(xx,integrand);
 end
-printf('\n'); 
+fprintf('\n'); 
 
 input('Press [enter] to graph results');
 disp('Graphing results...');

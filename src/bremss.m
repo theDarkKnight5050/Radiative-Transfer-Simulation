@@ -16,9 +16,9 @@ Pa=2*C.h*C.co^2/lama^5/(exp(E/C.kB/Te)-1); %Planck body source function
 
 ratio=L.E21/(4*C.pi)*n2*L.A21a*Linshape;
 eps=eps+ratio;                                                              %bound-bound emission
-eps=eps+1.63E-43*ne^2*lama^(-2)*Te^(-0.5)*L.g2a/Zi*(1-exp(-E/C.kB/Te))*100; %free-bound emisson
-eps=eps+1.63E-43*ne^2*lama^(-2)*Te^(-0.5)*exp(-E/C.kB/Te)*100;              %free-free emission
-if C.co/lama>P.Wp*ne^0.5
+eps=eps+1.63E-43*ne^2*lama^(-2)*Te^(-0.5)*L.g2a/Zi*(1-exp(-E/C.kB/Te)); %free-bound emisson
+eps=eps+1.63E-43*ne^2*lama^(-2)*Te^(-0.5)*exp(-E/C.kB/Te);              %free-free emission
+if C.co/lama>10*P.Wp*ne^0.5
   kap=kap+eps/Pa;
 end
 ratio=ratio/(eps-ratio);

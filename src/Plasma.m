@@ -3,7 +3,7 @@
 %% Class storing plasma constants
 classdef Plasma
   properties
-      Rp=0.00015;  %radius of the plasma (for parabola- hard cut-off, for Gaussian - core)
+      Rp=0.00015/2;  %radius of the plasma (for parabola- hard cut-off, for Gaussian - core)
       Ro=0.00025;  %outer boundary when using a Gaussian temperature profile
       Temax;       %peak plasma temperature
       Temin=2000;  %minimum plasma temperature

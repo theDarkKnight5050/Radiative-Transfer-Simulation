@@ -9,4 +9,4 @@ alpha=spline(L.Tstark, L.alpha_range, Te)*(Ne/P.Neref)^0.25; % alpha: Ion broade
 wa=(1+1.75*alpha*(1-0.75*R_Debye))*w;                        % Stark half width half maximum in Angstroms
 da=(d/w+2*alpha*(1-0.75*R_Debye))*w;                         % Stark shift in Angstroms
 %wa=1; da=0;
-endfunction
+end

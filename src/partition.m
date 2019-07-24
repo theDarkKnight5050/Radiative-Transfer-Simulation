@@ -8,4 +8,4 @@ Zcn=spline(L.Tpart,L.Yn,Te); %neutral partition function
 Zci=spline(L.Tpart,L.Y1,Te); %ion partition function
 Zc2=spline(L.Tpart,L.Y2,Te);
 
-endfunction
+end

@@ -9,4 +9,4 @@ warning('off', 'Octave:nearly-singular-matrix');
 fi=polyfit(X, Yi, 7);  %describes the polynomial for the ionized partition function
 fn=polyfit(X, Yn, 7);  %describes the polynomial for the neutral partition function
 
-endfunction
+end

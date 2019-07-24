@@ -25,8 +25,8 @@ xmax=(P.Ro^2-ypos^2)^.5;
 %xmax=(P.Rp^2-ypos^2)^.5;
 xx=xmin:(xmax-xmin)/40:xmax;
 
-numPoints=input(prompt='Input the desired number of data points: ');
-width=input(prompt='Input the desired window size (in Angstroms): ');
+numPoints=input('Input the desired number of data points: ');
+width=input('Input the desired window size (in Angstroms): ');
 x=2*width/numPoints;
 np=-width:x:width;  %advancement of wavelength in Angstroms
 intgrl=zeros(1,length(np));
@@ -38,7 +38,7 @@ for i=1:length(np) %spectral frequency interval
     if(count==5)
         printf('.');
         count=0;
-    endif
+    end
     
     npx=np(i);
     epsL=[];

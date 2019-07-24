@@ -34,7 +34,7 @@ classdef Line
     methods
         function line=Line(C)
             line.Ei=(13.62)*C.e; 
-            line.E2=86625.7*C.h*100*C.co; 
+            line.E2=86628.7*C.h*100*C.co; %https://physics.nist.gov/PhysRefData/Handbook/Tables/oxygentable5.htm
             line.E21=(C.h*C.co/(line.lama*1e-10)); 
             line.E1=line.E2-line.E21; 
             line.B21a=line.A21a*((line.lama*1e-10)^5/(2*C.h*C.co^2));  

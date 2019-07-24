@@ -24,8 +24,7 @@ if Ne>1e20 %only starts taking into account depression at 10^20m^(-3)
     end
 end
 
-%N2=L.g1a*Ne*No*exp(-L.E1*beta)/(No-Ne)/Z;
 N2=(No-Ne)*(L.g2a/Zcn)*exp(-L.E2*beta);
 N1=N2*(L.g1a/L.g2a)*exp(L.E21*beta); %Boltzam distribution
 
-endfunction
+end

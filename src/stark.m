@@ -1,16 +1,19 @@
 %% Author: aiabd <aiabd@LAPTOP-R5RTKBLK>
 %% Created: 2019-07-17
 
-function [wa, da] = stark (Ne, Te, L, P, C)
+function [wa, da] = stark (Ne, Te, L, P, C, first)
 R_Debye=6^(1/3)*C.pi^(1/6)*C.e*(4*C.pi*C.epsilon*C.kB)^(-0.5)*Te^(-0.5)*Ne^(1/6);  %R_Debye:mean distance between ions/Debye radius  
 w=spline(L.Tstark, L.w_range, Te)*(Ne/P.Neref);              % w: Electron impact half width in Angstroms 
 d=spline(L.Tstark, L.dw_range, Te)*w;                        % d: Electron impact half width in Angstroms
 alpha=spline(L.Tstark, L.alpha_range, Te)*(Ne/P.Neref)^0.25; % alpha: Ion broadening factor
+if R_Debye>0.8 || alpha>0.5
+  %warning='WARNING: stark parameters no longer in accurate regime. alpha=%d R_Debye=%d'; 
+  %disp(sprintf(warning, NaN, R_Debye));
+  %fprintf('!');
+  alpha=min(alpha, 0.5);
+  R_Debye=min(R_Debye, 0.8);
+end
 wa=(1+1.75*alpha*(1-0.75*R_Debye))*w;                        % Stark half width half maximum in Angstroms
 da=(d/w+2*alpha*(1-0.75*R_Debye))*w;                         % Stark shift in Angstroms
 %wa=1; da=0;
-%if R_Debye>=0.8 || alpha>=0.5
-%  warning='WARNING: stark parameters no longer in accurate regime. alpha=%d R_Debye=%d';
-%  disp(sprintf(warning, alpha, R_Debye));
-%end
 end

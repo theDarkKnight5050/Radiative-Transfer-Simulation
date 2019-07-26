@@ -12,8 +12,8 @@ classdef Plasma
       Wp;          %plasma frequency=Wp*ne^0.5
   end
   methods
-    function plasma=Plasma(C)
-      plasma.Temax=11604*input('Input max temperature in electron volts (minimum of 0.172): ');
+    function plasma=Plasma(C, temp)
+      plasma.Temax=11604*temp;
       plasma.Wp=(C.e^2/C.me/C.epsilon)^0.5;
     end
   end
